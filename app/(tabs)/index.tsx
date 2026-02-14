@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 type Book = {
     id: string,
     name: string,
-    price: string
+    price: string,
+    image: string
 }
 
 export default function Home() {
 
     const [allBook, setAllBook] = useState<Book[]>([])
+
 
     useEffect(() => {
         loadBook()
@@ -23,7 +25,7 @@ export default function Home() {
         }
     }
     async function removeBook(id: string) {
-        const newBook = allBook.filter((_, i) =>_.id !=id) 
+        const newBook = allBook.filter((_, i) => _.id != id)
         await AsyncStorage.setItem("book", JSON.stringify(newBook))
         setAllBook(newBook)
     }
@@ -38,6 +40,10 @@ export default function Home() {
                         <Text style={styles.text}>รหัส : {item.id}</Text>
                         <Text style={styles.title}>ชื่อเพลง : {item.name}</Text>
                         <Text style={styles.price}>ชื่อศิลปิน : {item.price}</Text>
+                        <Image
+                            source={{ uri: item.image }}
+                            style={styles.bookImge}
+                        />
                     </View>
                 )}
             />
@@ -80,5 +86,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontWeight: "bold",
     },
+    bookImge: {
+        width: "100%",
+        height: 200,
+        marginTop: 10,
+        borderRadius: 8,
+        alignSelf: "center"
 
+    },
 });

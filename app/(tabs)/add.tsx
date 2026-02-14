@@ -12,6 +12,7 @@ export default function Add() {
     const [bookName, setBookName] = useState("")
     const [bookPrice, setBookPrice] = useState("")
     const [allBook, setAllBook] = useState<Book[]>([])
+    const [bookImge, setBookImage] = useState("")
 
     useEffect(() => {
         loadBook()
@@ -28,7 +29,8 @@ export default function Add() {
         const book = {
             id: Date.now().toString(),
             name: bookName,
-            price: bookPrice
+            price: bookPrice,
+            image: bookImge
         }
 
         console.log(book)
@@ -39,21 +41,31 @@ export default function Add() {
 
         setBookName("")
         setBookPrice("")
+        setBookImage("")
     }
 
     return (
         <View style={myStyle.container}>
             <Text style={myStyle.label1}>เพิ่มเพลง</Text>
+
             <Text style={myStyle.label}>ชื่อเพลง</Text>
             <TextInput
                 value={bookName}
                 onChangeText={setBookName}
                 style={myStyle.input} />
+
             <Text style={myStyle.label}>ชื่อศิลปิน</Text>
             <TextInput
                 value={bookPrice}
                 onChangeText={setBookPrice}
                 style={myStyle.input} />
+
+            <Text style={myStyle.label}>รูป</Text>
+            <TextInput
+                value={bookImge}
+                onChangeText={setBookImage}
+                style={myStyle.input} />
+
             <View style={myStyle.buttonContainer}>
                 <Button title="บันทึก" onPress={addBook} color="#4CAF50" />
             </View>
