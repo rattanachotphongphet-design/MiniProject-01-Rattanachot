@@ -38,6 +38,9 @@ export default function Home() {
                         <Text style={styles.text}>รหัส : {item.id}</Text>
                         <Text style={styles.title}>ชื่อเพลง : {item.name}</Text>
                         <Text style={styles.price}>ชื่อศิลปิน : {item.price}</Text>
+                        <TouchableOpacity style={styles.deleteButton} onPress={() => removeBook(item.id)}>
+                            <Text style={styles.deleteText}>ลบ</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
             />
@@ -80,5 +83,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontWeight: "bold",
     },
-
+    deleteButton: {
+        alignSelf: "flex-end",
+        backgroundColor: "#FF4D4D",
+        paddingVertical: 6,
+        paddingHorizontal: 14,
+        borderRadius: 6,
+    },
+    deleteText: {
+        color: "#FFF",
+        fontWeight: "bold",
+    },
 });
